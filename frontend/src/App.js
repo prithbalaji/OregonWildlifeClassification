@@ -11,17 +11,15 @@ import Error from './components/Error';
 import Navigation from './components/Navigation';
 
 function App() {
-  return (
-    <BrowserRouter>
-        <div>
-          <Navigation />
+	return (
+		<BrowserRouter>
+			<Navigation />
             <Switch>
-             <Route path="/" component={Home} exact/>
-             <Route path="/about" component={About}/>
-            <Route component={Error}/>
-           </Switch>
-        </div> 
-      </BrowserRouter>
+				<Route path="/" component={Home} exact/>
+				<Route path="/about" component={About}/>
+            	<Route component={Error}/>
+			</Switch>
+        </BrowserRouter>
   );
 }
 
