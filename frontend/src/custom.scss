@@ -1,13 +1,10 @@
+$primary: #C8E1CC;
+$secondary:#F5CAC3;
+$dark:#2A2D34;
+$light: #E8F4EA;
+$alert: #7180AC;
+$danger: #985f6f;
+$info: #E8F4EA;
 
 
-$primary: red;
-$secondary: blue;
-$dark: white;
-$light: gray;
-$warning: green;
-$danger: red;
-$success: lightblue;
-$info: lightgreen;
-
-//import bootstrap styles at the bottom
-@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/scss/bootstrap";
