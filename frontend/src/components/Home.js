@@ -5,21 +5,22 @@ import DropZone from './dropzone/DropZone';
 
 function Home() {
     return (
-		<Jumbotron fluid>
-        	<Container>
-            	<h1>Team 10 Landing Page</h1>
-            	<p>
-              		You know we kick em out if they ain't with the crew, yeah im talkin about you you begging for attention talking shit on twitter too
-            	</p>
+		<div>
+			<Jumbotron fluid>
+        		<Container>
+        	    	<h1>Team 10 Landing Page</h1>
+        	    	<div>
+        	      		You know we kick em out if they ain't with the crew, yeah im talkin about you you begging for attention talking shit on twitter too
+        	    	</div>
 
-				<div>
-		        	<p className="title">React Drag and Drop Image Upload</p>
-		        	<div className="content">
-		            	<DropZone />
-		        	</div>
-		    	</div>
-			</Container>
-        </Jumbotron>
+				</Container>
+        	</Jumbotron>
+			<div>
+			    <div className="content">
+	    	    	<DropZone />
+			    </div>
+			</div>
+		</div>
     );
 }
  
