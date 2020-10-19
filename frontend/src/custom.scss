@@ -1,0 +1,13 @@
+
+
+$primary: red;
+$secondary: blue;
+$dark: white;
+$light: gray;
+$warning: green;
+$danger: red;
+$success: lightblue;
+$info: lightgreen;
+
+//import bootstrap styles at the bottom
+@import "~bootstrap/scss/bootstrap.scss";
