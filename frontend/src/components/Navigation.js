@@ -8,12 +8,12 @@ function Navigation() {
 			<Navbar.Brand href="/" className="text-primary">WildCoders</Navbar.Brand>
 			<Nav className="mr-auto">
 				<Nav.Link href="/Construction">Model</Nav.Link>
-				<NavDropdown title="Data Visulization" id="collasible-nav-dropdown">
+				<NavDropdown title="Data Visualization" id="collasible-nav-dropdown">
 					<NavDropdown.Item href="/Construction">Prediction Probability</NavDropdown.Item>
 					<NavDropdown.Divider />
-					<NavDropdown.Item href="/Construction">Training Visualiation</NavDropdown.Item>
+					<NavDropdown.Item href="/Construction">Training Visualization</NavDropdown.Item>
 					<NavDropdown.Divider />
-					<NavDropdown.Item href="/Construction">Dataset Imbedding</NavDropdown.Item>
+					<NavDropdown.Item href="/Construction">Dataset Embedding</NavDropdown.Item>
 					<NavDropdown.Divider />
 					<NavDropdown.Item href="/Construction">Activation Map</NavDropdown.Item>
 				</NavDropdown>
