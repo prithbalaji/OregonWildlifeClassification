@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 function Navigation() {
@@ -18,7 +17,7 @@ function Navigation() {
 					<NavDropdown.Item href="/Construction">Activation Map</NavDropdown.Item>
 				</NavDropdown>
 				<Nav.Link href="/about">About</Nav.Link>
-		    </Nav>
+			</Nav>
 		</Navbar>
 	);
 }
