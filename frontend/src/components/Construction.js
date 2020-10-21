@@ -8,7 +8,7 @@ function Construction() {
 			<Jumbotron fliud>
 				<Container>
 					<h1>This page is under construction!</h1>
-					<Alert variant="secondary">
+					<Alert variant="primary">
 						Click <Alert.Link href="/">here</Alert.Link> to go back to our home page
 					</Alert>
 				</Container>
