@@ -5,6 +5,7 @@ import DropZone from './dropzone/DropZone';
 import * as d3 from 'd3';
 import csv_data from "../data/temp.csv";
 
+// React class structure adapted from https://medium.com/@Elijah_Meeks/interactive-applications-with-react-d3-f76f7b3ebc71
 class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -20,6 +21,7 @@ class Home extends Component {
 	}
 
 	createBarChart() {
+		// Adapted from Ahmed's code
 		const svg = d3.select('svg');
 		const width = +svg.attr('width');
 		const height = +svg.attr('height');
