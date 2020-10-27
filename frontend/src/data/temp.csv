@@ -1,0 +1,5 @@
+probability,predictedClass
+0.56, bald_eagle
+0.32, coyote
+0.04, raccoon
+0.02, deer
