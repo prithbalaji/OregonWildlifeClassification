@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Container } from 'react-bootstrap'
+import { Jumbotron, Container, ListGroup } from 'react-bootstrap'
 import AboutCard from './AboutCard';
 
 function About() {
@@ -11,16 +11,22 @@ function About() {
 					<h6 align="left" class="text-dark">Hello, we are the WildCoders and this is our group project for CS196 at UIUC. We hope you look around and find something interesting!</h6>
 					<hr/>
 				</Container>
-				<AboutCard
-					title="Carlos Conley"
-				    text="Frontend"
-					image=""
-					github="https://github.com/carlosconley"/>
-				<AboutCard
-					title="Colin Lu"
-				    text="Frontend"
-					image=""
-					github="https://github.com/carlosconley"/>
+				<ListGroup horizontal>
+					<ListGroup.Item>
+						<AboutCard
+							title="Carlos Conley"
+							text="Frontend"
+							image=""
+							github="https://github.com/carlosconley"/>
+					</ListGroup.Item>
+					<ListGroup.Item>
+						<AboutCard
+							title="Colin Lu"
+							text="Frontend"
+							image=""
+							github=""/>
+					</ListGroup.Item>
+				</ListGroup>
 			</Jumbotron>
 		</div>
 	);
