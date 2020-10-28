@@ -14,7 +14,7 @@ function About() {
 					<hr/>
 				</Container>
 				<Container fluid>
-					<Row >
+					<Row>
 						<Col>
 						<AboutCard
 							title="Carlos Conley"
@@ -29,6 +29,35 @@ function About() {
 							image=""
 							github="https://github.com/SimpleGeometry"/>
 						</Col>
+						<Col>
+						<AboutCard
+							title="Carl Chen"
+							text="Backend"
+							image=""
+							github="https://github.com/"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Prithvi Balaji"
+							text="Backend"
+							image=""
+							github="https://github.com/"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Jiwung Cha"
+							text="Modeling"
+							image=""
+							github="https://github.com/"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Ahmed Hasan"
+							text="PM"
+							image=""
+							github="https://github.com/"/>
+						</Col>
+
 					</Row>
 				</Container>
 			</Jumbotron>
