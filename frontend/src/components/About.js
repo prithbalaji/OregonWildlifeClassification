@@ -1,10 +1,35 @@
 import React from 'react';
+import { Jumbotron, Container, Row, Col } from 'react-bootstrap'
+import AboutCard from './AboutCard';
 
 function About() {
 	return (
 		<div>
-			<h1>About US</h1>
-			<p>About US page body content</p>
+			<Jumbotron>
+				<Container>
+					<h1>About Us</h1>
+					<h6 align="left" class="text-dark">Hello, we are the WildCoders and this is our group project for CS196 at UIUC. We hope you look around and find something interesting!</h6>
+					<hr/>
+				</Container>
+				<Container fluid>
+					<Row >
+						<Col>
+						<AboutCard
+							title="Carlos Conley"
+							text="Frontend"
+							image=""
+							github="https://github.com/carlosconley"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Colin Lu"
+							text="Frontend"
+							image=""
+							github="https://github.com/SimpleGeometry"/>
+						</Col>
+					</Row>
+				</Container>
+			</Jumbotron>
 		</div>
 	);
 }
