@@ -15,7 +15,7 @@ function About() {
 					<hr/>
 				</Container>
 				<Container fluid>
-					<Row className="justify-content-center">
+					<Row>
 						<Col>
 						<AboutCard
 							title="Carlos Conley"
@@ -58,7 +58,6 @@ function About() {
 							image=""
 							github="https://github.com/"/>
 						</Col>
-
 					</Row>
 				</Container>
 			</Jumbotron>
