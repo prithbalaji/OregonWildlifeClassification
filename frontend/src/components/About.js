@@ -1,4 +1,5 @@
 import React from 'react';
+import carlos from '../images/carlosicon_pinktoyellow.png';
 import { Jumbotron, Container, Row, Col } from 'react-bootstrap'
 import AboutCard from './AboutCard';
 
@@ -8,13 +9,13 @@ function About() {
 			<Jumbotron>
 				<Container>
 					<h1>About Us</h1>
-					<p class="text-warning text-left">
+					<p className="text-warning text-left">
 						Hello, we are the WildCoders and this is our group project for CS196 at UIUC. We hope you look around and find something interesting!
 					</p>
 					<hr/>
 				</Container>
 				<Container fluid>
-					<Row>
+					<Row className="justify-content-center">
 						<Col>
 						<AboutCard
 							title="Carlos Conley"
