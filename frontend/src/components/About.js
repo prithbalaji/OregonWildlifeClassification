@@ -8,7 +8,9 @@ function About() {
 			<Jumbotron>
 				<Container>
 					<h1>About Us</h1>
-					<h6 align="left" class="text-dark">Hello, we are the WildCoders and this is our group project for CS196 at UIUC. We hope you look around and find something interesting!</h6>
+					<p class="text-warning text-left">
+						Hello, we are the WildCoders and this is our group project for CS196 at UIUC. We hope you look around and find something interesting!
+					</p>
 					<hr/>
 				</Container>
 				<Container fluid>
