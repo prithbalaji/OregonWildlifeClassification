@@ -1,4 +1,5 @@
 import React from 'react';
+import carlos from '../images/carlosicon_pinktoyellow.png';
 import { Jumbotron, Container, Row, Col } from 'react-bootstrap'
 import AboutCard from './AboutCard';
 
@@ -8,11 +9,13 @@ function About() {
 			<Jumbotron>
 				<Container>
 					<h1>About Us</h1>
-					<h6 align="left" class="text-dark">Hello, we are the WildCoders and this is our group project for CS196 at UIUC. We hope you look around and find something interesting!</h6>
+					<p className="text-warning text-left">
+						Hello, we are the WildCoders and this is our group project for CS196 at UIUC. We hope you look around and find something interesting!
+					</p>
 					<hr/>
 				</Container>
 				<Container fluid>
-					<Row >
+					<Row>
 						<Col>
 						<AboutCard
 							title="Carlos Conley"
@@ -26,6 +29,34 @@ function About() {
 							text="Frontend"
 							image=""
 							github="https://github.com/SimpleGeometry"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Carl Chen"
+							text="Backend"
+							image=""
+							github="https://github.com/"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Prithvi Balaji"
+							text="Backend"
+							image=""
+							github="https://github.com/"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Jiwung Cha"
+							text="Modeling"
+							image=""
+							github="https://github.com/"/>
+						</Col>
+						<Col>
+						<AboutCard
+							title="Ahmed Hasan"
+							text="PM"
+							image=""
+							github="https://github.com/"/>
 						</Col>
 					</Row>
 				</Container>

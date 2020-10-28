@@ -11,7 +11,7 @@ function AboutCard(props) {
 			<Col>
 				<Card style={{ width: '18rem' }}>
 					<Card.Body>
-						<Card.Img variant="top" src={d_photo}/>
+						<Card.Img variant="top" src={d_photo} />
 						<Card.Title>{props.title}</Card.Title>
 						<Card.Text class="text-dark text-left">
 							{props.text}
