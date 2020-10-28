@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Container, Row } from 'react-bootstrap'
+import { Jumbotron, Container, Row, Col } from 'react-bootstrap'
 import AboutCard from './AboutCard';
 
 function About() {
@@ -12,27 +12,21 @@ function About() {
 					<hr/>
 				</Container>
 				<Container fluid>
-					<Row style= {{ height: '600px'}}>
+					<Row >
+						<Col>
 						<AboutCard
 							title="Carlos Conley"
 							text="Frontend"
 							image=""
 							github="https://github.com/carlosconley"/>
+						</Col>
+						<Col>
 						<AboutCard
 							title="Colin Lu"
 							text="Frontend"
 							image=""
 							github="https://github.com/SimpleGeometry"/>
-						<AboutCard
-							title="David Valencia"
-							text="Backend"
-							image=""
-							github="" />
-						<AboutCard
-							title="David Valencia"
-							text="Backend"
-							image=""
-							github="" />
+						</Col>
 					</Row>
 				</Container>
 			</Jumbotron>
