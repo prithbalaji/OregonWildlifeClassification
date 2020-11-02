@@ -44,14 +44,14 @@ class Home extends Component {
 
 			const yAxis = d3.axisLeft(yScale);
 
-			const xAxis = d3.axisTop(xScale);
+			const xAxis = d3.axisTop(xScale).tickFormat(d3.format(".0%"));
 
 			const g = svg.append('g')
 			    .attr('transform', `translate(${margin.left},${margin.top})`);
 
-			yAxis(g.append('g'));
-			xAxis(g.append('g'));
-
+			g.append('g').call(xAxis);
+			g.append('g').call(yAxis);
+			
 			g.selectAll('rect').data(data)
 				.enter().append('rect')
 				.attr('y', d => yScale(yValue(d)) + 10)
@@ -71,18 +71,11 @@ class Home extends Component {
 		};
 
 		const color = d3.scaleSequential()
-						.domain([0, 100])
+						.domain([0, 1])
 						.interpolator(d3.interpolateRgb('rgb(200, 225, 204)', 'rgb(1, 68, 33)'));
 
 		d3.csv(csv_data).then((data) => {
-			data.forEach(d => {
-				d.probability = +d.probability * 100;
-			})
-			data.forEach(d => {
-				console.log(d);
-			});
 			render(data);
-			console.log(data);
 		});
 	}
 
