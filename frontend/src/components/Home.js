@@ -70,6 +70,8 @@ class Home extends Component {
 			console.log(color(0));
 		};
 
+		const format = d3.format(".2%");
+
 		const color = d3.scaleSequential()
 						.domain([0, 100])
 						.interpolator(d3.interpolateRgb('rgb(200, 225, 204)', 'rgb(1, 68, 33)'));
