@@ -35,7 +35,7 @@ class Home extends Component {
 
 	    	const xScale = d3.scaleLinear()
 			    .domain([0, d3.max(data, xValue) * 1.1])
-			    .range([0, innerWidth]);
+				.range([0, innerWidth]);
 			console.log(xScale.range());
 
 			const yScale = d3.scaleBand()
@@ -44,7 +44,7 @@ class Home extends Component {
 
 			const yAxis = d3.axisLeft(yScale);
 
-			const xAxis = d3.axisTop(xScale);
+			const xAxis = d3.axisTop(xScale)
 
 			const g = svg.append('g')
 			    .attr('transform', `translate(${margin.left},${margin.top})`);
@@ -54,6 +54,8 @@ class Home extends Component {
 
 			g.selectAll('rect').data(data)
 				.enter().append('rect')
+				.on("mouseover", onMouseOver)
+				.on("mouseout", onMouseOut)
 				.attr('y', d => yScale(yValue(d)) + 10)
 				.attr('x', 1)
 			    .attr('width', d => xScale(xValue(d)))
@@ -65,16 +67,46 @@ class Home extends Component {
 				.attr('font-size', 12)
 				.attr('font-family', 'sans-serif');
 
+			function onMouseOver(s, i) {
+				const color = d3.scaleSequential()
+				                .domain([0, 100])
+				                .interpolator(d3.interpolateRgb('#DFD5CD', '#855E42'));
+
+				d3.select(this).attr("fill", d => color(d.probability));
+
+				d3.select(this)
+				  .transition()
+				  .duration(400)
+				  .attr('width',  d => xScale(xValue(d)) + 5)
+				  .attr('y', d => yScale(yValue(d)))
+				  .attr('height', yScale.bandwidth() + 10);
+
+			}
+
+			function onMouseOut(d, i) {
+				d3.select(this).attr('fill', d => color(d.probability))
+				d3.select(this)
+				  .transition()
+				  .duration(400)
+				  .attr('y', d => yScale(yValue(d)) + 10)
+				  .attr('width', d => xScale(xValue(d)))
+				  .attr('height', yScale.bandwidth() - 10)
+				  .attr('fill', d => color(d.probability));
+
+				d3.selectAll('.val')
+				  .remove()
+			}
+
 			console.log(csv_data.probability)
 
 			console.log(color(0));
 		};
 
-		const format = d3.format(".2%");
 
 		const color = d3.scaleSequential()
 						.domain([0, 100])
 						.interpolator(d3.interpolateRgb('rgb(200, 225, 204)', 'rgb(1, 68, 33)'));
+
 
 		d3.csv(csv_data).then((data) => {
 			data.forEach(d => {
