@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import DropZone from './dropzone/DropZone';
 import * as d3 from 'd3';
 import csv_data from "../data/temp.csv";
@@ -132,15 +133,21 @@ class Home extends Component {
 
 					</Container>
     	    	</Jumbotron>
-				<div>
-				    <div className="content">
-		    	    	<DropZone />
-				    </div>
-				</div>
-				<svg
-					ref={node => this.node = node}
-					width={1200} height={400}
-				></svg>
+				<Container>
+					<Row style={{ height: '50em' }}>
+						<div>
+							<div className="content">
+								<DropZone />
+							</div>
+						</div>
+					</Row>
+					<Row>
+						<svg
+							ref={node => this.node = node}
+							width={1200} height={400}
+						></svg>
+					</Row>
+				</Container>
 			</div>
     	);
 	}
