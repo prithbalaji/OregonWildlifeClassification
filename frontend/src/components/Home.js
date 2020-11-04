@@ -30,7 +30,7 @@ class Home extends Component {
 		const render = data => {
 			const xValue = d => d.probability;
 			const yValue = d => d.predictedClass;
-			const margin = {top: 20, right: 40, bottom: 20, left: 100};
+			const margin = {top: 20, right: 100, bottom: 20, left: 100};
 			const innerWidth = width - margin.left - margin.right;
 			const innerHeight = height - margin.top - margin.bottom;
 
