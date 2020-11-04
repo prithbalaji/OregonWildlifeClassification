@@ -30,7 +30,7 @@ class Home extends Component {
 		const render = data => {
 			const xValue = d => d.probability;
 			const yValue = d => d.predictedClass;
-			const margin = {top: 20, right: 20, bottom: 20, left: 100};
+			const margin = {top: 20, right: 100, bottom: 20, left: 100};
 			const innerWidth = width - margin.left - margin.right;
 			const innerHeight = height - margin.top - margin.bottom;
 
@@ -57,10 +57,10 @@ class Home extends Component {
 				.enter().append('rect')
 				.on("mouseover", onMouseOver)
 				.on("mouseout", onMouseOut)
-				.attr('y', d => yScale(yValue(d)) + 10)
+				.attr('y', d => yScale(yValue(d)) + 11)
 				.attr('x', 1)
 			    .attr('width', d => xScale(xValue(d)))
-				.attr('height', yScale.bandwidth() - 10)
+				.attr('height', yScale.bandwidth() - 20)
 				.attr('fill', d => color(d.probability));
 
 			g.selectAll("text")
@@ -68,7 +68,7 @@ class Home extends Component {
 				.attr('font-size', 12)
 				.attr('font-family', 'sans-serif');
 
-			function onMouseOver(s, i) {
+			function onMouseOver(mouseEvent, d) {
 				const color = d3.scaleSequential()
 				                .domain([0, 100])
 				                .interpolator(d3.interpolateRgb('#DFD5CD', '#855E42'));
@@ -79,8 +79,15 @@ class Home extends Component {
 				  .transition()
 				  .duration(400)
 				  .attr('width',  d => xScale(xValue(d)) + 5)
-				  .attr('y', d => yScale(yValue(d)))
-				  .attr('height', yScale.bandwidth() + 10);
+				  .attr('y', d => yScale(yValue(d)) + 1)
+				  .attr('height', yScale.bandwidth());
+
+				const xOffset = xScale(xValue(d)) + 20;
+				const yOffset = yScale(yValue(d)) + yScale.bandwidth() / 2 + 5;
+				g.append("text").attr("class", "val")
+					.attr('x', xOffset)
+					.attr('y', yOffset)
+					.text((xValue(d) * 100).toFixed(2) + "%");
 
 			}
 
@@ -89,9 +96,9 @@ class Home extends Component {
 				d3.select(this)
 				  .transition()
 				  .duration(400)
-				  .attr('y', d => yScale(yValue(d)) + 10)
+				  .attr('y', d => yScale(yValue(d)) + 11)
 				  .attr('width', d => xScale(xValue(d)))
-				  .attr('height', yScale.bandwidth() - 10)
+				  .attr('height', yScale.bandwidth() - 20)
 				  .attr('fill', d => color(d.probability));
 
 				d3.selectAll('.val')
@@ -127,14 +134,14 @@ class Home extends Component {
 					</Container>
     	    	</Jumbotron>
 				<Container>
-					<Row style={{ height: '50em' }}>
+					<Row style={{ height: '50em' }} className="justify-content-center">
 						<div>
 							<div className="content">
 								<DropZone />
 							</div>
 						</div>
 					</Row>
-					<Row>
+					<Row className="justify-content-center">
 						<svg
 							ref={node => this.node = node}
 							width={1200} height={400}
