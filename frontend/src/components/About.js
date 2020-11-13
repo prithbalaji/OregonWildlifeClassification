@@ -1,5 +1,6 @@
 import React from 'react';
 import carlos from '../images/carlosicon_pinktoyellow.png';
+import d_img from '../images/test_photo.jpg';
 import { Jumbotron, Container, Row, Col } from 'react-bootstrap'
 import AboutCard from './AboutCard';
 
@@ -20,14 +21,14 @@ function About() {
 						<AboutCard
 							title="Carlos Conley"
 							text="Frontend"
-							image=""
+							image={carlos}
 							github="https://github.com/carlosconley"/>
 						</Col>
 						<Col>
 						<AboutCard
 							title="Colin Lu"
 							text="Frontend"
-							image=""
+							image={d_img}
 							github="https://github.com/SimpleGeometry"/>
 						</Col>
 						<Col>
@@ -43,21 +44,21 @@ function About() {
 						<AboutCard
 							title="Carl Chen"
 							text="Backend"
-							image=""
+							image={d_img}
 							github="https://github.com/"/>
 						</Col>
 						<Col>
 						<AboutCard
 							title="Prithvi Balaji"
 							text="Modeling"
-							image=""
+							image={d_img}
 							github="https://github.com/"/>
 						</Col>
 						<Col>
 						<AboutCard
 							title="Jiwung Cha"
 							text="Modeling"
-							image=""
+							image={d_img}
 							github="https://github.com/"/>
 						</Col>
 					</Row>
@@ -68,7 +69,7 @@ function About() {
 						<AboutCard
 							title="Ahmed Hasan"
 							text="PM"
-							image=""
+							image={d_img}
 							github="https://github.com/"/>
 						</Col>
 						<Col></Col>
