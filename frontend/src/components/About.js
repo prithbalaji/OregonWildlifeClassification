@@ -14,7 +14,7 @@ function About() {
 					<hr/>
 				</Container>
 				<Container fluid>
-					<Row className="justify-content-center">
+					<Row style={{ height: '22em' }}>
 						<Col>
 						<AboutCard
 							title="Carlos Conley"
@@ -27,6 +27,15 @@ function About() {
 							text="Frontend"
 							github="https://github.com/SimpleGeometry"/>
 						</Col>
+						<Col>
+							<AboutCard
+								title="David Valencia"
+								text="Backend"
+								image=""
+								github="https://github.com/" />
+						</Col>
+					</Row>
+					<Row style={{ height: "22em" }}>
 						<Col>
 						<AboutCard
 							title="Carl Chen"
@@ -45,12 +54,17 @@ function About() {
 							text="Modeling"
 							github="https://github.com/"/>
 						</Col>
+					</Row>
+					<Row style={{ height: "22em" }}>
+
+						<Col></Col>
 						<Col>
 						<AboutCard
 							title="Ahmed Hasan"
 							text="PM"
 							github="https://github.com/"/>
 						</Col>
+						<Col></Col>
 					</Row>
 				</Container>
 			</Jumbotron>
