@@ -11,7 +11,7 @@ import numpy as np
 import torch.cuda
 
 data_path = '/home/gortheus/Desktop/group10/backend/wildlifeTrainer/data/archive/oregon_wildlife/oregon_wildlife'
-transform = transforms.Compose([transforms.Resize(size=(400,40)) ,transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+transform = transforms.Compose([transforms.Resize(size=(96,96)) ,transforms.ToTensor(), transforms.Normalize((0, 0, 0), (0.5, 0.5, 0.5))])
 trainset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
 trainloader = data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
 
@@ -26,7 +26,7 @@ else:
     print(device)
 #print(torch.cuda.get_device_name(device))
 classes = ('bald_eagle', 'black_bear', 'bobcat', 'canada_lynx', 'columbian_black-tailed_deer', 
-'cougar', 'cotoye', 'deer', 'elk', 'gray_fox', 'gray_wolf', 'mountain_beaver', 'nutria', 'raccoon',
+'cougar', 'coyote', 'deer', 'elk', 'gray_fox', 'gray_wolf', 'mountain_beaver', 'nutria', 'raccoon',
 'raven', 'red_fox', 'ringtail', 'sea_lions', 'seals', 'virginia_opossum')
 
 def imshow(img):
@@ -35,14 +35,15 @@ def imshow(img):
     plt.imshow(np.transpose(npimg, (1, 2, 0)))
     plt.show()
 
-# get some random training images
-dataiter = iter(trainloader)
-images, labels = dataiter.next()
+if __name__ == '__main__':
+    # get some random training images
+    dataiter = iter(trainloader)
+    images, labels = dataiter.next()
 
-# show images
-imshow(torchvision.utils.make_grid(images))
-# print labels
-print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
+    # show images
+    imshow(torchvision.utils.make_grid(images))
+    # print labels
+    print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
 
 import torch.nn as nn
 import torch.nn.functional as F
@@ -55,26 +56,27 @@ class Net(nn.Module):
         self.conv1 = nn.Conv2d(3, 6, 5)
         self.pool = nn.MaxPool2d(2, 2)
         self.conv2 = nn.Conv2d(6, 16, 5)
-        self.fc1 = nn.Linear(16 * 5 * 5, 120)
+        self.fc1 = nn.Linear(16 * 21 * 21, 120)
         self.fc2 = nn.Linear(120, 84)
-        self.fc3 = nn.Linear(84, 10)
+        self.fc3 = nn.Linear(84, 20)
 
     def forward(self, x):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
-        x = x.view(-1, 16 * 5 * 5)
+        x = x.view(-1, 16 * 21 * 21)
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         return x    
 
 net = Net()
+# Defines a loss function and optimizer
+import torch.optim as optim
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
-import torch.optim as optim 
-def train_model():
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
-    for epoch in range(2):  # loop over the dataset multiple times
+def train_model(net,optimizer,criterion, epochs):
+    for epoch in range(epochs):  # loop over the dataset multiple times
 
         running_loss = 0.0
         for i, data in enumerate(trainloader, 0):
@@ -92,9 +94,11 @@ def train_model():
 
             # print statistics
             running_loss += loss.item()
-            if i % 2000 == 1999:    # print every 2000 mini-batches
+            if i % 2 == 1:    # print every 100 mini-batches
                 print('[%d, %5d] loss: %.3f' %
                     (epoch + 1, i + 1, running_loss / 2000))
                 running_loss = 0.0
 
     print('Finished Training')
+
+train_model(net, optimizer, criterion, 2)
