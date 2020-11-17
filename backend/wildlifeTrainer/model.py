@@ -101,4 +101,8 @@ def train_model(net,optimizer,criterion, epochs):
 
     print('Finished Training')
 
-train_model(net, optimizer, criterion, 2)
+def trainSave():
+    train_model(net, optimizer, criterion, 4)
+    PATH = './wild_net.pth'
+    torch.save(net.state_dict(), PATH)
+
