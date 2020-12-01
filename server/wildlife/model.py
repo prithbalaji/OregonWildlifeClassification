@@ -9,46 +9,15 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
 import torch.cuda
-
-data_path = '/home/gortheus/Desktop/group10/backend/wildlifeTrainer/data/archive/oregon_wildlife/oregon_wildlife'
-transform = transforms.Compose([transforms.Resize(size=(96,96)) ,transforms.ToTensor(), transforms.Normalize((0, 0, 0), (0.5, 0.5, 0.5))])
-trainset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
-trainloader = data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
-
-testset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
-testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=2)
-if torch.cuda.is_available():
-    print("Yes!!")
-    device = torch.cuda.device("cuda:0")
-else:
-    print("NO!")
-    device = torch.device("cpu")
-    print(device)
-#print(torch.cuda.get_device_name(device))
-classes = ('bald_eagle', 'black_bear', 'bobcat', 'canada_lynx', 'columbian_black-tailed_deer', 
-'cougar', 'coyote', 'deer', 'elk', 'gray_fox', 'gray_wolf', 'mountain_beaver', 'nutria', 'raccoon',
-'raven', 'red_fox', 'ringtail', 'sea_lions', 'seals', 'virginia_opossum')
+import torch.nn as nn
+import torch.nn.functional as F
 
 def imshow(img):
-    img = img / 2 + 0.5     # unnormalize
     npimg = img.numpy()
     plt.imshow(np.transpose(npimg, (1, 2, 0)))
     plt.show()
 
-if __name__ == '__main__':
-    # get some random training images
-    dataiter = iter(trainloader)
-    images, labels = dataiter.next()
-
-    # show images
-    imshow(torchvision.utils.make_grid(images))
-    # print labels
-    print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
-
-import torch.nn as nn
-import torch.nn.functional as F
-
-#Copy the neural network from the Neural Networks section before and modify 
+# Copy the neural network from the Neural Networks section before and modify 
 # it to take 3-channel images (instead of 1-channel images as it was defined).
 class Net(nn.Module):
     def __init__(self):
@@ -69,12 +38,6 @@ class Net(nn.Module):
         x = self.fc3(x)
         return x    
 
-net = Net()
-# Defines a loss function and optimizer
-import torch.optim as optim
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
-
 def train_model(net,optimizer,criterion, epochs):
     for epoch in range(epochs):  # loop over the dataset multiple times
 
@@ -82,7 +45,6 @@ def train_model(net,optimizer,criterion, epochs):
         for i, data in enumerate(trainloader, 0):
             # get the inputs; data is a list of [inputs, labels]
             inputs, labels = data
-            print(type(inputs))
 
             # zero the parameter gradients
             optimizer.zero_grad()
@@ -102,4 +64,45 @@ def train_model(net,optimizer,criterion, epochs):
 
     print('Finished Training')
 
-train_model(net, optimizer, criterion, 2)
+def trainSave():
+    train_model(net, optimizer, criterion, 1)
+    PATH = './wild_net.pth'
+    torch.save(net.state_dict(), PATH)
+
+
+if __name__ == '__main__':
+    data_path = 'oregon_wildlife/oregon_wildlife'
+    transform = transforms.Compose([transforms.Resize(size=(96,96)), transforms.ToTensor()])
+    trainset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
+    trainloader = data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
+
+    testset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
+    testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=2)
+    print(torch._C._cuda_getDeviceCount())
+    if torch.cuda.is_available():
+        print("Yes!!")
+        device = torch.cuda.device("cuda:0")
+    else:
+        print("NO!")
+        device = torch.device("cpu")
+        print(device)
+    #print(torch.cuda.get_device_name(device))
+    classes = ('bald_eagle', 'black_bear', 'bobcat', 'canada_lynx', 'columbian_black-tailed_deer', 
+    'cougar', 'coyote', 'deer', 'elk', 'gray_fox', 'gray_wolf', 'mountain_beaver', 'nutria', 'raccoon',
+    'raven', 'red_fox', 'ringtail', 'sea_lions', 'seals', 'virginia_opossum')
+
+    # get some random training images
+    dataiter = iter(trainloader)
+    images, labels = dataiter.next()
+
+    # show images
+    imshow(torchvision.utils.make_grid(images))
+    # print labels
+    print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
+
+    net = Net()
+    # Defines a loss function and optimizer
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+
+    trainSave()

@@ -26,9 +26,9 @@ SECRET_KEY = 'dz#+80j-xfw9%-u4#%7du)h&!85gbw88z^ee*5d$fmv(!!u5qy'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '3.132.70.176'
-    ]
-
+    '3.132.70.176',
+    '127.0.0.1'
+]
 
 # Application definition
 
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -124,3 +124,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CORS_ORIGIN_ALLOW_ALL = True
