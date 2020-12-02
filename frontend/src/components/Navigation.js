@@ -8,12 +8,12 @@ function Navigation() {
 			<Navbar.Brand href="/" className="text-primary">
 				<img
 					src={logo}
-					width="64"
+					width="84"
 					height="64"
 					className="d-inline-block align-middle"
 					alt=""
 				/>
-				_WildCoders</Navbar.Brand>
+				WildCoders</Navbar.Brand>
 
 
 			<Nav className="mr-auto">

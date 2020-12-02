@@ -8,6 +8,7 @@ import csv_data from "../data/temp.csv";
 
 // React class structure adapted from https://medium.com/@Elijah_Meeks/interactive-applications-with-react-d3-f76f7b3ebc71
 class Home extends Component {
+
 	constructor(props) {
 		super(props);
 		this.createBarChart = this.createBarChart.bind(this);
@@ -124,7 +125,7 @@ class Home extends Component {
 	render() {
     	return (
 			<div>
-				<Row style={{ height: '2em' }} />
+				<Row style={{ height: '5em' }} />
 				<Row style={{ height: '50em' }} className="justify-content-center">
 					<div>
 						<div className="content">
@@ -136,7 +137,7 @@ class Home extends Component {
 					<svg
 						ref={node => this.node = node}
 						width={1200} height={400}
-					></svg>
+					/>
 				</Row>
 			</div>
     	);

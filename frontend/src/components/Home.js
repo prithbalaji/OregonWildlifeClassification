@@ -12,12 +12,12 @@ export class Home extends Component {
 			<div>
 				<Jumbotron fluid>
     	    		<Container>
-    	    	    	<h1>Classification Probability Visualizer</h1>
+    	    	    	<h1>Wildlife Image Classifier</h1>
     	    	    	<div style={{ height: "3em" }}>
-    	    	      		Upload or drag and drop an image to see the prediction probabilities!
+    	    	      		Submit and image to see what we think it is!
     	    	    	</div>
 						<div>
-						<Button href="/model">Test your image!</Button>
+						<Button href="/model">Test your image.</Button>
 						</div>
 					</Container>
     	    	</Jumbotron>
