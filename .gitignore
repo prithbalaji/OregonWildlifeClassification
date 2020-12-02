@@ -1,1 +1,2 @@
-**/*.pyc
+/backend/wildlifeTrainer/data/archive/oregon_wildlife/oregon_wildlife
+*.pyc
