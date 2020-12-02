@@ -17,6 +17,7 @@ trainloader = data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=
 
 testset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
 testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=2)
+print(torch._C._cuda_getDeviceCount())
 if torch.cuda.is_available():
     print("Yes!!")
     device = torch.cuda.device("cuda:0")
@@ -102,4 +103,7 @@ def train_model(net,optimizer,criterion, epochs):
 
     print('Finished Training')
 
-train_model(net, optimizer, criterion, 2)
+def trainSave():
+    train_model(net, optimizer, criterion, 4)
+    PATH = './wild_net.pth'
+    torch.save(net.state_dict(), PATH)
