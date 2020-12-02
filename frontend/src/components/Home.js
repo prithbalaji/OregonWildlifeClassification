@@ -12,14 +12,7 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {probabilities: []};
-		
 		this.createBarChart = this.createBarChart.bind(this);
-
-		/*
-		axios.get("http://127.0.0.1:8000/api/students/testtesttest").then(resp => {
-			console.log(resp.data.test);
-		});
-		*/
 	}
 
 	componentDidMount() {
@@ -124,7 +117,7 @@ class Home extends Component {
 	}
 
 	updateProbabilities = (imageFile) => {
-		axios.post("http://127.0.0.1:8000/api/students/testtesttest", imageFile, {
+		axios.post("http://127.0.0.1:8000/wildlife/model", imageFile, {
 			headers: {
 				'Content-Type': imageFile.type
 			}
