@@ -14,7 +14,7 @@ export class Home extends Component {
     	    		<Container>
     	    	    	<h1>Wildlife Image Classifier</h1>
     	    	    	<div style={{ height: "3em" }}>
-    	    	      		Submit and image to see what we think it is!
+    	    	      		Submit an image to see what we think it is!
     	    	    	</div>
 						<div>
 						<Button href="/model">Test your image.</Button>
