@@ -13,7 +13,7 @@ export class Home extends Component {
 				<Jumbotron fluid>
     	    		<Container>
     	    	    	<h1>Classification Probability Visualizer</h1>
-    	    	    	<div>
+    	    	    	<div style={{ height: "3em" }}>
     	    	      		Upload or drag and drop an image to see the prediction probabilities!
     	    	    	</div>
 						<div>
