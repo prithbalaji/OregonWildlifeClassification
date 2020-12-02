@@ -33,7 +33,7 @@ def index(request):
         transform = transforms.Compose([transforms.Resize(size=(96, 96)), transforms.ToTensor()])
         input_img = torch.unsqueeze(transform(img), 0)
         probabilities = net(input_img)
-
+        
         # Return the probabilities in Python list form (converted to a JS array in the HTTP response)
         return JsonResponse({'probabilities': torch.squeeze(probabilities).tolist()})
     else:

@@ -16,11 +16,15 @@ class Home extends Component {
 	}
 
 	componentDidMount() {
-		this.createBarChart();
+		if (this.state.probabilities.length > 0) {
+			this.createBarChart();
+		}
 	}
 
 	componentDidUpdate() {
-		this.createBarChart();
+		if (this.state.probabilities.length > 0) {
+			this.createBarChart();
+		}
 	}
 
 	createBarChart() {
@@ -128,6 +132,15 @@ class Home extends Component {
 	};
 
 	render() {
+		let probability_chart;
+		if (this.state.probabilities.length > 0) {
+			probability_chart = <Row className="justify-content-center">
+									<svg ref={node => this.node = node} width={1200} height={400} />
+								</Row>;
+		} else {
+			probability_chart = <Row className="justify-content-center"/>;
+		}
+
     	return (
 			<div>
 				<Jumbotron fluid>
@@ -147,12 +160,7 @@ class Home extends Component {
 							</div>
 						</div>
 					</Row>
-					<Row className="justify-content-center">
-						<svg
-							ref={node => this.node = node}
-							width={1200} height={400}
-						></svg>
-					</Row>
+					{probability_chart}
 				</Container>
 			</div>
     	);
