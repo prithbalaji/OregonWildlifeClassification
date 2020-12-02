@@ -5,11 +5,13 @@ import Row from 'react-bootstrap/Row';
 import DropZone from './dropzone/DropZone';
 import * as d3 from 'd3';
 import csv_data from "../data/temp.csv";
+import axios from "axios";
 
 // React class structure adapted from https://medium.com/@Elijah_Meeks/interactive-applications-with-react-d3-f76f7b3ebc71
 class Home extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {probabilities: []};
 		this.createBarChart = this.createBarChart.bind(this);
 	}
 
@@ -37,14 +39,12 @@ class Home extends Component {
 	    	const xScale = d3.scaleLinear()
 			    .domain([0, d3.max(data, xValue) * 1.1])
 				.range([0, innerWidth]);
-			console.log(xScale.range());
 
 			const yScale = d3.scaleBand()
 			    .domain(data.map(yValue))
 			    .range([0, innerHeight]);
 
 			const yAxis = d3.axisLeft(yScale);
-
 			const xAxis = d3.axisTop(xScale).tickFormat(d3.format(".0%"));
 
 			const g = svg.append('g')
@@ -104,12 +104,7 @@ class Home extends Component {
 				d3.selectAll('.val')
 				  .remove()
 			}
-
-			console.log(csv_data.probability)
-
-			console.log(color(0));
 		};
-
 
 		const color = d3.scaleSequential()
 						.domain([0, 1])
@@ -120,6 +115,17 @@ class Home extends Component {
 			render(data);
 		});
 	}
+
+	updateProbabilities = (imageFile) => {
+		axios.post("http://127.0.0.1:8000/wildlife/model", imageFile, {
+			headers: {
+				'Content-Type': imageFile.type
+			}
+		}).then(response => {
+			this.setState({probabilities: response.data.probabilities});
+			console.log(response.data.probabilities);
+		});
+	};
 
 	render() {
     	return (
@@ -137,7 +143,7 @@ class Home extends Component {
 					<Row style={{ height: '50em' }} className="justify-content-center">
 						<div>
 							<div className="content">
-								<DropZone />
+								<DropZone sendImageToModel = {this.updateProbabilities}/>
 							</div>
 						</div>
 					</Row>

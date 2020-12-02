@@ -21,6 +21,8 @@ class DropZone extends React.Component {
 			    file: file,
 			    imagePreviewUrl: reader.result
 		    });
+
+			this.props.sendImageToModel(file);
 		}
 		
 		if (file) {
@@ -53,6 +55,8 @@ class DropZone extends React.Component {
 			    file: file,
 			    imagePreviewUrl: reader.result
 		    });
+
+			this.props.sendImageToModel(file);
 		}
 		
 		if (file) {
