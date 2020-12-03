@@ -41,7 +41,7 @@ function About() {
 								img={ david }
 								title="David Valencia"
 								text="Backend"
-								github="https://github.com/" />
+								github="https://github.com/svalenciadavid" />
 						</Col>
 					</Row>
 					<Row style={{ height: "25em" }}>
@@ -57,14 +57,14 @@ function About() {
 							img={ prithvi }
 							title="Prithvi Balaji"
 							text="Backend"
-							github="https://github.com/"/>
+							github="https://github.com/prithbalaji"/>
 						</Col>
 						<Col className="row justify-content-center">
 						<AboutCard
 							img={ jiwung }
 							title="Jiwung Cha"
 							text="Modeling"
-							github="https://github.com/"/>
+							github="https://github.com/jcha-dot"/>
 						</Col>
 					</Row>
 					<Row style={{ height: "25em" }}>
@@ -74,7 +74,7 @@ function About() {
 							img={ ahmed }
 							title="Ahmed Hasan"
 							text="PM"
-							github="https://github.com/"/>
+							github="https://github.com/ranchncarrots"/>
 						</Col>
 						<Col></Col>
 					</Row>
