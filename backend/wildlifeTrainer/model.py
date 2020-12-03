@@ -40,7 +40,7 @@ class Net(nn.Module):
 
 def train_model(net, optimizer, criterion, epochs):
     minibatches_per_interval = 100
-    net.load_state_dict(torch.load('.wild_net.pth'))
+    net.load_state_dict(torch.load('wild_net.pth'))
 
      # Loop over the dataset multiple times
     for epoch in range(epochs):
@@ -65,7 +65,7 @@ def train_model(net, optimizer, criterion, epochs):
                 print('[Epoch %d, mini-batch %5d] loss: %.3f' %
                     (epoch + 1, i + 1, running_loss / minibatches_per_interval))
                 running_loss = 0.0
-                torch.save(net.state_dict(), '.wild_net.pth')
+                torch.save(net.state_dict(), 'wild_net.pth')
 
     print('Finished Training')
 
@@ -85,11 +85,6 @@ def getTrainAndTestLoaders():
     testset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=2)
     return trainloader, testloader
-
-def trainSave():
-    train_model(net, optimizer, criterion, 4)
-    PATH = './wild_net.pth'
-    torch.save(net.state_dict(), PATH)
 
 if __name__ == '__main__':
     trainloader, testloader = getTrainAndTestLoaders()
@@ -116,6 +111,6 @@ if __name__ == '__main__':
     # Define the network, loss function, and optimizer
     net = Net()
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.9)
+    optimizer = optim.SGD(net.parameters(), lr=0.00001, momentum=0.9)
 
-    trainSave()
+    train_model(net, optimizer, criterion, 10)
