@@ -15,17 +15,21 @@ def testModel():
     # Load the data
     _, testloader = model.getTrainAndTestLoaders()
     dataiter = iter(testloader)
-    images, labels = dataiter.next()
-    
+        
     # Load our trained model
     PATH = 'wild_net.pth'
     net = model.Net()
     net.load_state_dict(torch.load(PATH))
+    
+    '''
+    # Test some sample images
+    images, labels = dataiter.next()
     outputs = net(images)
     print(outputs)
     _, predicted = torch.max(outputs, 1)
     print('Predicted: ', ' '.join('%5s' % model.getClassNames()[predicted[j]]
                               for j in range(4)))
+    '''
 
     # Let's see how it tests on the whole data set
     correct = 0
@@ -38,6 +42,7 @@ def testModel():
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
 
-    print('Accuracy of the network on the ? test images: %d %%' % (
-        100 * correct / total))
-testModel()
+    print('Accuracy of the network on the {0:.0f} test images: {1:.2f}%'.format(len(testloader), 100 * correct / total))
+
+if __name__ == '__main__':
+    testModel()

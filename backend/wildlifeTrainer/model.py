@@ -12,6 +12,8 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import numpy as np
 
+import testModel
+
 def imshow(img):
     npimg = img.numpy()
     plt.imshow(np.transpose(npimg, (1, 2, 0)))
@@ -39,13 +41,18 @@ class Net(nn.Module):
         return x    
 
 def train_model(net, optimizer, criterion, epochs):
-    minibatches_per_interval = 100
-    net.load_state_dict(torch.load('wild_net.pth'))
+    minibatches_per_interval = 300
+    epochs_per_test_evaluation = 1
+
+    try:
+        net.load_state_dict(torch.load('wild_net.pth'))
+    except FileNotFoundError:
+        pass
 
      # Loop over the dataset multiple times
     for epoch in range(epochs):
         running_loss = 0.0
-        for i, data in enumerate(trainloader, 0):
+        for i, data in enumerate(trainloader):
             # Get the inputs; data is a list of [inputs, labels]
             inputs, labels = data
 
@@ -60,12 +67,19 @@ def train_model(net, optimizer, criterion, epochs):
 
             running_loss += loss.item()
 
-            # Print training statistics and save model checkpoint every minibatches_per_interval loops
-            if i % minibatches_per_interval == minibatches_per_interval - 1: 
-                print('[Epoch %d, mini-batch %5d] loss: %.3f' %
-                    (epoch + 1, i + 1, running_loss / minibatches_per_interval))
+            # Print training statistics and save model checkpoint every minibatches_per_interval
+            # loops, or at the end of the epoch
+            if (i + 1) % minibatches_per_interval == 0 or i == len(trainloader) - 1: 
+                if (i + 1) % minibatches_per_interval == 0:
+                    print('[Epoch {0}, mini-batch {1}] loss: {2:.3f}'.
+                            format(str(epoch + 1).rjust(2, ' '), str(i + 1).rjust(5, ' '), running_loss / minibatches_per_interval))
                 running_loss = 0.0
                 torch.save(net.state_dict(), 'wild_net.pth')
+                torch.save(trainloader, 'trainloader.pth')
+
+        # Print test accuracy (remove if just trying to train quickly)
+        if (epoch + 1) % epochs_per_test_evaluation == 0:
+            testModel.testModel()
 
     print('Finished Training')
 
@@ -76,14 +90,25 @@ def getClassNames():
 
 def getTrainAndTestLoaders():
     data_path = './data/archive/oregon_wildlife/oregon_wildlife'
+    trainloader_path = 'trainloader.pth'
+    testloader_path = 'testloader.pth'
 
-    transform = transforms.Compose([transforms.Resize(size=(96,96)) ,transforms.ToTensor()])
+    try:
+        trainloader = torch.load(trainloader_path)
+        testloader = torch.load(testloader_path)
+    except:
+        transform = transforms.Compose([transforms.Resize(size=(96,96)) ,transforms.ToTensor()])
 
-    trainset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
-    trainloader = data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
-    
-    testset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=2)
+        dataset = torchvision.datasets.ImageFolder(root=data_path, transform=transform)
+        num_training = int(len(dataset) * 0.7)
+        num_test = len(dataset) - num_training
+        trainset, testset = data.random_split(dataset, [num_training, num_test])
+        trainloader = data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
+        testloader = data.DataLoader(testset, batch_size=4, shuffle=False, num_workers=2)
+
+    torch.save(trainloader, trainloader_path)
+    torch.save(testloader, testloader_path)
+
     return trainloader, testloader
 
 if __name__ == '__main__':
@@ -111,6 +136,6 @@ if __name__ == '__main__':
     # Define the network, loss function, and optimizer
     net = Net()
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(net.parameters(), lr=0.00001, momentum=0.9)
+    optimizer = optim.SGD(net.parameters(), lr=0.003, momentum=0.9)
 
     train_model(net, optimizer, criterion, 10)
