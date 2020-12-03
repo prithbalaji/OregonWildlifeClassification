@@ -4,10 +4,10 @@ import AboutCard from './AboutCard';
 import carlos from '../images/carlos.png';
 import colin from '../images/colin.png';
 import david from '../images/david.jpg'
-import carl from '../images/carl.jpg'
+import carl from '../images/carl.png'
 import prithvi from '../images/prithvi.jpg'
 import jiwung from '../images/jiwung.jpg'
-import ahmed from '../images/ahmed.jpg'
+import ahmed from '../images/ahmed.png'
 
 function About() {
 	return (
