@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Jumbotron, Container, Button } from 'react-bootstrap';
 
 export class Home extends Component {
-	static propTypes = {
-
-	}
-
 	render() {
 		return (
 			<div>

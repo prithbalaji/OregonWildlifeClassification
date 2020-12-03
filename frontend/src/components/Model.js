@@ -5,21 +5,26 @@ import Row from 'react-bootstrap/Row';
 import DropZone from './dropzone/DropZone';
 import * as d3 from 'd3';
 import csv_data from "../data/temp.csv";
+import axios from "axios";
 
 // React class structure adapted from https://medium.com/@Elijah_Meeks/interactive-applications-with-react-d3-f76f7b3ebc71
 class Home extends Component {
-
 	constructor(props) {
 		super(props);
+		this.state = {data: []};
 		this.createBarChart = this.createBarChart.bind(this);
 	}
 
 	componentDidMount() {
-		this.createBarChart();
+		if (this.state.data.length > 0) {
+			this.createBarChart();
+		}
 	}
 
 	componentDidUpdate() {
-		this.createBarChart();
+		if (this.state.data.length > 0) {
+			this.createBarChart();
+		}
 	}
 
 	createBarChart() {
@@ -29,6 +34,8 @@ class Home extends Component {
 		const height = +svg.attr('height');
 
 		const render = data => {
+			d3.selectAll("g > *").remove();
+
 			const xValue = d => d.probability;
 			const yValue = d => d.predictedClass;
 			const margin = {top: 20, right: 100, bottom: 20, left: 100};
@@ -38,14 +45,12 @@ class Home extends Component {
 	    	const xScale = d3.scaleLinear()
 			    .domain([0, d3.max(data, xValue) * 1.1])
 				.range([0, innerWidth]);
-			console.log(xScale.range());
 
 			const yScale = d3.scaleBand()
 			    .domain(data.map(yValue))
 			    .range([0, innerHeight]);
 
 			const yAxis = d3.axisLeft(yScale);
-
 			const xAxis = d3.axisTop(xScale).tickFormat(d3.format(".0%"));
 
 			const g = svg.append('g')
@@ -105,44 +110,61 @@ class Home extends Component {
 				d3.selectAll('.val')
 				  .remove()
 			}
-
-			console.log(csv_data.probability)
-
-			console.log(color(0));
 		};
-
 
 		const color = d3.scaleSequential()
 						.domain([0, 1])
 						.interpolator(d3.interpolateRgb('rgb(200, 225, 204)', 'rgb(1, 68, 33)'));
 
-
 		d3.csv(csv_data).then((data) => {
-			render(data);
+			render(this.state.data);
 		});
 	}
 
+	updateProbabilities = (imageFile) => {
+		axios.post("http://127.0.0.1:8000/wildlife/model", imageFile, {
+			headers: {
+				'Content-Type': imageFile.type
+			}
+		}).then(response => {
+			this.setState({data: response.data.data});
+		});
+	};
+
 	render() {
+		let probability_chart;
+		if (this.state.data.length > 0) {
+			probability_chart = <Row className="justify-content-center">
+									<svg ref={node => this.node = node} width={1200} height={400} />
+								</Row>;
+		} else {
+			probability_chart = <Row className="justify-content-center"/>;
+		}
+
     	return (
 			<div>
-				<Row style={{ height: '5em' }} />
-				<Row style={{ height: '50em' }} className="justify-content-center">
-					<div>
-						<div className="content">
-							<DropZone />
+				<Jumbotron fluid>
+    	    		<Container>
+    	    	    	<h1>Classification Probability Visualizer</h1>
+    	    	    	<div>
+    	    	      		Upload or drag and drop an image to see the prediction probabilities!
+    	    	    	</div>
+
+					</Container>
+    	    	</Jumbotron>
+				<Container>
+					<Row style={{ height: '50em' }} className="justify-content-center">
+						<div>
+							<div className="content">
+								<DropZone sendImageToModel = {this.updateProbabilities}/>
+							</div>
 						</div>
-					</div>
-				</Row>
-				<Row className="justify-content-center">
-					<svg
-						ref={node => this.node = node}
-						width={1200} height={400}
-					/>
-				</Row>
+					</Row>
+					{probability_chart}
+				</Container>
 			</div>
     	);
 	}
 }
 
 export default Home;
-
