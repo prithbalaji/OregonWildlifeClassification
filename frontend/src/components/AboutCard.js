@@ -8,8 +8,9 @@ function AboutCard(props) {
 	return (
 		<div>
 			<Col>
-				<Card style={{ width: '18rem' }}>
+				<Card bg="success" border="white" style={{ width: '18rem' }}>
 					<Card.Body>
+						<Card.Img variant="top" src={ props.img } style={{ objectFit: "cover", height: "200px", marginBottom: "0.5em" }} />
 						<Card.Title>{props.title}</Card.Title>
 						<Card.Text class="text-dark text-left">
 							{props.text}
@@ -25,6 +26,7 @@ function AboutCard(props) {
 export default AboutCard;
 
 AboutCard.propTypes = {
+	img: PropTypes.string,
 	title:  PropTypes.string.isRequired,
 	text:   PropTypes.string.isRequired,
 	github: PropTypes.string,

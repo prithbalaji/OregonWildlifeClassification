@@ -117,10 +117,7 @@ class Home extends Component {
 						.interpolator(d3.interpolateRgb('rgb(200, 225, 204)', 'rgb(1, 68, 33)'));
 
 		d3.csv(csv_data).then((data) => {
-			console.log(data);
-			console.log(this.state.data);
 			render(this.state.data);
-			//render(data);
 		});
 	}
 
@@ -171,4 +168,3 @@ class Home extends Component {
 }
 
 export default Home;
-
