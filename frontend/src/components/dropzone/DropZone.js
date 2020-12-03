@@ -68,7 +68,7 @@ class DropZone extends React.Component {
 		let {imagePreviewUrl} = this.state;
 		let imagePreview = null;
 		if (imagePreviewUrl) {
-			imagePreview = (<img src={imagePreviewUrl} />);
+			imagePreview = (<img src={imagePreviewUrl} style={{height: '500px', width: '500px'}} />);
 		} else {
 			imagePreview = (
 				<div className="drop-message">

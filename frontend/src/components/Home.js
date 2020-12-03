@@ -11,18 +11,18 @@ import axios from "axios";
 class Home extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {probabilities: []};
+		this.state = {data: []};
 		this.createBarChart = this.createBarChart.bind(this);
 	}
 
 	componentDidMount() {
-		if (this.state.probabilities.length > 0) {
+		if (this.state.data.length > 0) {
 			this.createBarChart();
 		}
 	}
 
 	componentDidUpdate() {
-		if (this.state.probabilities.length > 0) {
+		if (this.state.data.length > 0) {
 			this.createBarChart();
 		}
 	}
@@ -34,6 +34,8 @@ class Home extends Component {
 		const height = +svg.attr('height');
 
 		const render = data => {
+			d3.selectAll("g > *").remove();
+
 			const xValue = d => d.probability;
 			const yValue = d => d.predictedClass;
 			const margin = {top: 20, right: 100, bottom: 20, left: 100};
@@ -114,9 +116,11 @@ class Home extends Component {
 						.domain([0, 1])
 						.interpolator(d3.interpolateRgb('rgb(200, 225, 204)', 'rgb(1, 68, 33)'));
 
-
 		d3.csv(csv_data).then((data) => {
-			render(data);
+			console.log(data);
+			console.log(this.state.data);
+			render(this.state.data);
+			//render(data);
 		});
 	}
 
@@ -126,14 +130,13 @@ class Home extends Component {
 				'Content-Type': imageFile.type
 			}
 		}).then(response => {
-			this.setState({probabilities: response.data.probabilities});
-			console.log(response.data.probabilities);
+			this.setState({data: response.data.data});
 		});
 	};
 
 	render() {
 		let probability_chart;
-		if (this.state.probabilities.length > 0) {
+		if (this.state.data.length > 0) {
 			probability_chart = <Row className="justify-content-center">
 									<svg ref={node => this.node = node} width={1200} height={400} />
 								</Row>;

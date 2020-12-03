@@ -66,6 +66,12 @@ def train_model(net, optimizer, criterion, epochs):
 
     print('Finished Training')
 
+def getClassNames():
+    return ['bald_eagle', 'black_bear', 'bobcat', 'canada_lynx', 'columbian_black-tailed_deer', 
+    'cougar', 'coyote', 'deer', 'elk', 'gray_fox', 'gray_wolf', 'mountain_beaver', 'nutria', 'raccoon',
+    'raven', 'red_fox', 'ringtail', 'sea_lions', 'seals', 'virginia_opossum']
+
+
 def trainSave():
     train_model(net, optimizer, criterion, 4)
     PATH = './wild_net.pth'
@@ -90,9 +96,7 @@ if __name__ == '__main__':
         device = torch.device("cpu")
 
     # Mapping each index to a class name
-    classes = ['bald_eagle', 'black_bear', 'bobcat', 'canada_lynx', 'columbian_black-tailed_deer', 
-    'cougar', 'coyote', 'deer', 'elk', 'gray_fox', 'gray_wolf', 'mountain_beaver', 'nutria', 'raccoon',
-    'raven', 'red_fox', 'ringtail', 'sea_lions', 'seals', 'virginia_opossum']
+    classes = getClassNames()
 
     # Get some random training images to display (verifying the images in the dataset are what we expect)
     dataiter = iter(trainloader)

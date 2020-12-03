@@ -10,6 +10,16 @@ sys.path.append(os.path.join(os.getcwd(), '..', 'backend/wildlifeTrainer'))
 
 import model
 
+def zipProbabilityAndClassNames(probabilities, predictedClasses):
+    data = [] 
+    for i, (probability, predictedClass) in enumerate(zip(probabilities, predictedClasses)):
+        data.append({'probability': probability, 'predictedClass': predictedClass})
+    return data
+
+def getTopFiveProbabilities(data):
+    data.sort(key=lambda x: x.get('probability'), reverse=True)
+    return data[:5]
+
 # Disables csrf (there may be a better way to just set the csrf cookie settings without disabling it entirely)
 @csrf_exempt
 def index(request):
@@ -35,6 +45,8 @@ def index(request):
         probabilities = net(input_img)
         
         # Return the probabilities in Python list form (converted to a JS array in the HTTP response)
-        return JsonResponse({'probabilities': torch.squeeze(probabilities).tolist()})
+        return JsonResponse({
+            'data': getTopFiveProbabilities(zipProbabilityAndClassNames(torch.squeeze(probabilities).tolist(), model.getClassNames()))
+        })
     else:
         return HttpResponse()
