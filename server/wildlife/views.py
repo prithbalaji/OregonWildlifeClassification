@@ -42,7 +42,7 @@ def index(request):
         # Transform the input and retrieve model prediction
         transform = transforms.Compose([transforms.Resize(size=(96, 96)), transforms.ToTensor()])
         input_img = torch.unsqueeze(transform(img), 0)
-        probabilities = net(input_img)
+        probabilities = torch.nn.Softmax(dim=1)(net(input_img))
         
         # Return the probabilities in Python list form (converted to a JS array in the HTTP response)
         return JsonResponse({

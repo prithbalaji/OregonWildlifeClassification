@@ -1,6 +1,7 @@
 import React from 'react';
 import { Jumbotron, Container, Row, Col } from 'react-bootstrap'
 import AboutCard from './AboutCard';
+/*
 import carlos from '../images/carlos.png';
 import colin from '../images/colin.png';
 import david from '../images/david.jpg'
@@ -8,10 +9,19 @@ import carl from '../images/carl.png'
 import prithvi from '../images/prithvi.png'
 import jiwung from '../images/jiwung.png'
 import ahmed from '../images/ahmed.png'
+*/
 
 function About() {
+	let carlos = "";
+		let colin = "";
+		let david = "";
+		let carl = "";
+		let prithvi = "";
+		let jiwung = "";
+		let ahmed = "";
+
 	return (
-		<div>
+				<div>
 			<Jumbotron>
 				<Container>
 					<h1>About Us</h1>
@@ -20,6 +30,7 @@ function About() {
 					</p>
 				</Container>
 			</Jumbotron>
+			/*
 				<Container>
 					<Row style={{ height: '25em' }}>
 						<Col className="row justify-content-center">
@@ -78,7 +89,7 @@ function About() {
 						</Col>
 						<Col></Col>
 					</Row>
-				</Container>
+				</Container>*/
 		</div>
 	);
 }
