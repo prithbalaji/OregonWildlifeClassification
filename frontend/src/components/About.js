@@ -5,8 +5,8 @@ import carlos from '../images/carlos.png';
 import colin from '../images/colin.png';
 import david from '../images/david.jpg'
 import carl from '../images/carl.png'
-import prithvi from '../images/prithvi.jpg'
-import jiwung from '../images/jiwung.jpg'
+import prithvi from '../images/prithvi.png'
+import jiwung from '../images/jiwung.png'
 import ahmed from '../images/ahmed.png'
 
 function About() {
@@ -33,14 +33,14 @@ function About() {
 						<AboutCard
 							img={ colin }
 							title="Colin Lu"
-							text="Frontend"
+							text="Frontend/Backend"
 							github="https://github.com/SimpleGeometry"/>
 						</Col>
 						<Col className="row justify-content-center">
 							<AboutCard
 								img={ david }
 								title="David Valencia"
-								text="Backend"
+								text="Modeling"
 								github="https://github.com/svalenciadavid" />
 						</Col>
 					</Row>
@@ -49,14 +49,14 @@ function About() {
 						<AboutCard
 							img = { carl }
 							title="Carl Chen"
-							text="Backend"
+							text="Modeling"
 							github="https://github.com/"/>
 						</Col>
 						<Col className="row justify-content-center">
 						<AboutCard
 							img={ prithvi }
 							title="Prithvi Balaji"
-							text="Backend"
+							text="Modeling"
 							github="https://github.com/prithbalaji"/>
 						</Col>
 						<Col className="row justify-content-center">
