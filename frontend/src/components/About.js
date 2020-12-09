@@ -23,7 +23,6 @@ function About() {
 					</p>
 				</Container>
 			</Jumbotron>
-			/*
 				<Container>
 					<Row style={{ height: '25em' }}>
 						<Col className="row justify-content-center">
@@ -82,7 +81,7 @@ function About() {
 						</Col>
 						<Col></Col>
 					</Row>
-				</Container>*/
+				</Container>
 		</div>
 	);
 }
