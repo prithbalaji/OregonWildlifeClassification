@@ -1,24 +1,17 @@
 import React from 'react';
 import { Jumbotron, Container, Row, Col } from 'react-bootstrap'
 import AboutCard from './AboutCard';
-/*
+
 import carlos from '../images/carlos.png';
 import colin from '../images/colin.png';
-import david from '../images/david.jpg'
+import david from '../images/david.png'
 import carl from '../images/carl.png'
 import prithvi from '../images/prithvi.png'
 import jiwung from '../images/jiwung.png'
 import ahmed from '../images/ahmed.png'
-*/
+
 
 function About() {
-	let carlos = "";
-		let colin = "";
-		let david = "";
-		let carl = "";
-		let prithvi = "";
-		let jiwung = "";
-		let ahmed = "";
 
 	return (
 				<div>
@@ -37,7 +30,7 @@ function About() {
 						<AboutCard
 							img={ carlos }
 							title="Carlos Conley"
-							text="Frontend"
+							text="Frontend/Backend"
 							github="https://github.com/carlosconley"/>
 						</Col>
 						<Col className="row justify-content-center">

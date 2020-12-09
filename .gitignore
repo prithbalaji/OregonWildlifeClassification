@@ -1,3 +1,3 @@
-frontend/src/images/**
+#frontend/src/images/**
 /backend/wildlifeTrainer/data/archive/oregon_wildlife/oregon_wildlife
 *.pyc
