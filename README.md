@@ -10,6 +10,8 @@ For the server and backend, we used Django, along with PIL for a bit of image fo
 For the frontend, we used React for our framework. For the visuals, we used React Bootstrap for the CSS, and D3 for the probability visualization chart. For sending HTTP requests, we used Axios.
 
 ## Running the Project
+Warning: when running the Django server, there are warnings in server/server/settings.py to not have DEBUG set to True, and to have the SECRET_KEY available to the public. You probably want to change these (and make the SECRET_KEY something you set yourself) so it's not the same as what's on the github.
+
 ### Package Installation
 When you run the project (either locally or on a server, as described below), you may need to install some packages. See the below
 terminal commands for any installs you still need to make.
