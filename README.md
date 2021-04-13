@@ -2,6 +2,9 @@
 
 Hi, welcome to our project repository! This repository contains the code for the image classification model and the frontend, as well as the server that links the model predictions to the frontend. You can find the model in the [backend](https://github.com/CS196Illinois/group10/tree/master/backend) folder, the frontend in the [frontend](https://github.com/CS196Illinois/group10/tree/master/frontend) folder, and the server in the [server](https://github.com/CS196Illinois/group10/tree/master/server) folder.
 
+## Final Project Video/Demo
+Link: https://drive.google.com/file/d/16qFGrrMecYCjLR9WXZ9kpkwhxnxwyAB5/view?usp=sharing
+
 ## Technical Overview
 For modeling, we used PyTorch to build the model, and the [Oregon Wildlife dataset on Kaggle](https://www.kaggle.com/virtualdvid/oregon-wildlife/notebooks) to train our model. The model has two convolutional layers with maxpooling after each of them, followed by three fully-connected layers. You can find the model definition in backend/wildlifeTrainer/model.py, and the saved model parameter file in backend/wildlifeTrainer/wild_net.pth.
 
